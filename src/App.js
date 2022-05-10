@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+import Navbar from "./Navbar";
+import Home from "./Home";
+import Button from "./Button";
+import Input from "./Input";
 
+const styles = {
+  content: css`
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+  `,
+};
 function App() {
+  const title = "Welcome to the new blok";
+  const likes = 50;
+  const person = { name: "Seb", age: 19 };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      <div css={styles.content}>
+        <h1>{title}</h1>
+        <p>Liked: {likes * likes} times</p>
+        <span>
+          {person.name} {person.age}
+        </span>
+        <Home />
+        <Button />
+        <Input />
+      </div>
     </div>
   );
 }
