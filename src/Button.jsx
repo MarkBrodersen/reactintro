@@ -4,7 +4,7 @@ const Button = () => {
     window.requestAnimationFrame(Death);
   };
   const handleClick = () => {
-    alert("You did this to your self");
+    alert("You did this to yourself");
     window.requestAnimationFrame(Death);
   };
 
@@ -14,7 +14,7 @@ const Button = () => {
         handleClick("Mike");
       }}
     >
-      Click me
+      Don't click me
     </button>
   );
 };
