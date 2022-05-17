@@ -1,27 +1,50 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import FeatherIcon from "feather-icons-react";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BlogList from "./BlogList";
+import useFetch from "./UseFetch";
 
 const Home = () => {
-  const [blogs, setBlogs] = useState([
-    { title: "My new website", body: "lorem ipsum...", author: "mario", id: 1 },
-    { title: "Welcome party!", body: "lorem ipsum...", author: "yoshi", id: 2 },
-    {
-      title: "Web dev top tips",
-      body: "lorem ipsum...",
-      author: "mario",
-      id: 3,
-    },
-  ]);
+  const styles = {
+    flexContainer: css`
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    `,
+    box: css`
+      animation: loading 1000ms infinite;
+      width: 200px;
+      height: 200px;
+
+      @keyframes loading {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    `,
+  };
+  const {
+    error,
+    isPending,
+    data: blogs,
+  } = useFetch(
+    "https://raw.githubusercontent.com/iamshaunjp/Complete-React-Tutorial/lesson-20/dojo-blog/data/db.json"
+  );
+
   return (
-    <div className="HomePage">
-      <BlogList blogs={blogs} title="All Blogs" />
-      <BlogList
-        blogs={blogs.filter((blog) => blog.author === "mario")}
-        title="Mario's Blogs"
-      />
+    <div className="home">
+      {error && <div>{error}</div>}
+      {isPending && (
+        <div>
+          <FeatherIcon css={styles.box} icon={"box"} />
+        </div>
+      )}
+      {blogs && <BlogList blogs={blogs} />}
     </div>
   );
 };
