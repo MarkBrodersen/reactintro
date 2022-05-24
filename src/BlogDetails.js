@@ -2,18 +2,11 @@
 import { css } from "@emotion/react";
 import FeatherIcon from "feather-icons-react";
 
-import BlogList from "./BlogList";
+import { useParams } from "react-router-dom";
 import useFetch from "./UseFetch";
 
-const Home = () => {
+const BlogDetails = () => {
   const styles = {
-    flexContainer: css`
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 200px;
-      margin: 0 auto;
-    `,
     box: css`
       animation: loading 1000ms infinite;
       width: 200px;
@@ -29,23 +22,30 @@ const Home = () => {
       }
     `,
   };
+  const { id } = useParams();
+  console.log(id);
   const {
     error,
     isPending,
     data: blogs,
-  } = useFetch("http://localhost:8000/blogs/");
-
+  } = useFetch(`http://localhost:8000/blogs/${id}`);
   return (
-    <div className="home">
+    <div>
       {error && <div>{error}</div>}
       {isPending && (
         <div>
           <FeatherIcon css={styles.box} icon={"box"} />
         </div>
       )}
-      {blogs && <BlogList blogs={blogs} />}
+      {blogs && (
+        <article>
+          <h2>{blogs.title}</h2>
+          <span>Writthen by: {blogs.author}</span>
+          <p>{blogs.body}</p>
+        </article>
+      )}
     </div>
   );
 };
 
-export default Home;
+export default BlogDetails;

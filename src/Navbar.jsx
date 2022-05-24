@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { Link } from "react-router-dom";
 
 const styles = {
   navbar: css`
@@ -32,8 +33,8 @@ const Navbar = () => {
     <nav css={styles.navbar}>
       <h1>The Dojo Blog</h1>
       <div css={styles.linksContainer}>
-        <a href="/">Home</a>
-        <a href="/create">New Blog</a>
+        <Link to="home">Home</Link>
+        <Link to="create">New Blog</Link>
       </div>
     </nav>
   );

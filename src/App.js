@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import Navbar from "./Navbar";
-import Home from "./Home";
 import Button from "./Button";
+import { Outlet } from "react-router-dom";
 
 const styles = {
   content: css`
@@ -12,13 +12,12 @@ const styles = {
   `,
 };
 function App() {
-  const title = "Welcome to the new blogs";
   return (
     <div className="App">
       <Navbar />
       <Button />
       <div css={styles.content}>
-        <Home />
+        <Outlet />
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ const useFetch = (url) => {
         })
         .then((data) => {
           setIsPending(false);
-          setData(data.blogs);
+          setData(data);
           setError(null);
         })
         .catch((err) => {

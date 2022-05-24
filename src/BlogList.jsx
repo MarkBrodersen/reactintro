@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { useState } from "react";
-import FeatherIcon from "feather-icons-react";
+import { Link } from "react-router-dom";
 
 const BlogList = ({ blogs, title }) => {
   const styles = {
@@ -26,7 +25,6 @@ const BlogList = ({ blogs, title }) => {
       color: #808080;
       margin: 5px 0 15px 0;
     `,
-    blogContent: css``,
     blogButton: css`
       border-radius: 50%;
       border: none;
@@ -45,11 +43,12 @@ const BlogList = ({ blogs, title }) => {
       <h2>{title}</h2>
       {blogs.map((blog) => (
         <article css={styles.blogContainer} key={blog.id}>
-          <div>
-            <h2 css={styles.blogBody}>{blog.title}</h2>
-            <span css={styles.blogAuthor}>Writen by: {blog.author}</span>
-            <p css={styles.blogContent}>{blog.body}</p>
-          </div>
+          <Link to={`/blogs/${blog.id}`}>
+            <div>
+              <h2 css={styles.blogBody}>{blog.title}</h2>
+              <span css={styles.blogAuthor}>Writen by: {blog.author}</span>
+            </div>
+          </Link>
         </article>
       ))}
     </section>
