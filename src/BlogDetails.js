@@ -2,7 +2,7 @@
 import { css } from "@emotion/react";
 import FeatherIcon from "feather-icons-react";
 
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useFetch from "./UseFetch";
 
 const BlogDetails = () => {
@@ -23,12 +23,21 @@ const BlogDetails = () => {
     `,
   };
   const { id } = useParams();
-  console.log(id);
+  const navigate = useNavigate();
   const {
     error,
     isPending,
     data: blogs,
   } = useFetch(`http://localhost:8000/blogs/${id}`);
+
+  const handleClick = () => {
+    if (window.confirm("are you sure"))
+      fetch("http://localhost:8000/blogs/" + blogs.id, {
+        method: "DELETE",
+      }).then(() => {
+        navigate("/home");
+      });
+  };
   return (
     <div>
       {error && <div>{error}</div>}
@@ -42,6 +51,7 @@ const BlogDetails = () => {
           <h2>{blogs.title}</h2>
           <span>Writthen by: {blogs.author}</span>
           <p>{blogs.body}</p>
+          <button onClick={handleClick}>Delete</button>
         </article>
       )}
     </div>

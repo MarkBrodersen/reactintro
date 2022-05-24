@@ -6,6 +6,7 @@ import App from "./App";
 import Home from "./Home";
 import Create from "./Create";
 import BlogDetails from "./BlogDetails";
+import NotFound from "./NotFound";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,6 +17,7 @@ root.render(
           <Route path="/home" element={<Home />} />
           <Route path="/create" element={<Create />} />
           <Route path="/Blogs/:id" element={<BlogDetails />} />
+          <Route path="*" element={<NotFound />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
